@@ -9,5 +9,9 @@ CREATE TABLE IF NOT EXISTS issued_tickets (
     event_id VARCHAR(50) NOT NULL,
     user_id VARCHAR(50) NOT NULL,
     ticket_number INTEGER NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT unique_event_ticket UNIQUE (event_id, ticket_number)
 );
+
+CREATE INDEX IF NOT EXISTS idx_issued_tickets_event ON issued_tickets(event_id);
+CREATE INDEX IF NOT EXISTS idx_issued_tickets_user ON issued_tickets(user_id);
